@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>App Name: A coding challenge</title>
+    <title>Trustworthy: A coding challenge</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.5/dist/css/bootstrap.min.css" rel="stylesheet"
         integrity="sha384-SgOJa3DmI69IUzQ2PVdRZhwQ+dy64/BUtbMJw1MZ8t5HZApcHrRKUc4W0kG879m7" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.min.css">
@@ -19,12 +19,12 @@
 
 </head>
 
-<body data-ma-theme="blue">
+<body data-ma-theme="blue" class="bg-dark-subtle">
     <header>
         <nav class="navbar navbar-expand-md" data-bs-theme="dark">
             <div class="container">
                 <a class="navbar-brand" href="index.html">
-                    <img src="/img/michael Abi ye (3)/9.png" height="33" /> App Name</a>
+                    <img src="/img/michael Abi ye (3)/9.png" height="33" /> Trustworthy</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"
                     aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -65,42 +65,204 @@
 
                 <pre class="line-numbers">
                     <code class="language-js">
-function displayMessage() {
-    let inputElement = document.getElementById('messageinput');
-    let message = inputElement.value
-    Swal.fire(
-        {
+                    
+function getValues() {
+    //get each input by ID
+    let trustInput = document.getElementById('trustInput');
+    let worthyInput = document.getElementById('worthyInput');
+    // get the value out of the &lt;input>
+    let startNumber = parseInt(trustInput.value);
+    let endNumber = parseInt(worthyInput.value);
+
+    //parseInt turns a string into a number
+
+    //if the input is not a number we get NAN 
+
+    // validate that the inputs are numbers
+    if (Number.isInteger(startNumber) && Number.isInteger(endNumber)) {
+        // if (Text.isInteger(startNumber) && Text.isInteger(endNumber));
+        //after you know if the number are both integers you 
+        let generatedNumbers = generateTrustworthy(startNumber, endNumber);
+
+
+        //want to generate the numbers with function generateNumbers
+        displayNumbers(generatedNumbers);
+
+    }
+
+    else {
+        //tell the user to enter valid numbers
+        Swal.fire({
             backdrop: false,
-            title: 'App Name',
-            text: message,
-        }
-    )
+            title: 'oops',
+            text: 'please enter valid start and end number',
+            icon: 'error',
+        });
+
+
+    }
+
+
+    // what do i do if theyre not numbers 
+
 
 }
+
+
+//generate some numbers
+function generateTrustworthy(start, end) {
+    //generate numbers between start and end
+    let numbers = [];
+
+
+    for (let i = start; i &lt;= end; i = i + 1) {
+        if (i % 3 == 0 && i % 5 == 0) {
+            numbers.push("TrustWorthy");
+        }
+        //replace the number with fizz by understanding 
+        // that the numbers variable is saying that whatever is pushed
+        //in the loop (numbers.push) will show up in the array 
+        // that you want displayed on the table.
+        //if i want to replace the value itself with a word i use (ELSE IF)
+
+        else if (i % 3 == 0) {
+            numbers.push("Trust")
+        }
+        else if (i % 5 == 0) {
+            numbers.push("Worthy")
+        }
+
+        else
+            numbers.push(i);
+
+    }
+    // if i is less than or equal to a hundred it will do whatever we 
+    // want it to in the curly bracket
+    // write down the number i is on
+
+    return numbers;
+
+
+}
+
+
+//display the numbers on the page
+function displayNumbers(numbers) {
+
+    let tableHtml = '';
+
+
+
+    //go through each number in the array
+    for (let index = 0; index &lt; numbers.length; index = index + 1) {
+        //get one number out of the array
+        let currentNumber = numbers[index];
+        let className = '';
+
+
+
+
+
+        //else if (currentNumber % 5 == 0) { className = 'worthy'; }
+        //else (currentNumber % 15 == 0); { className = 'trustworthy'; }
+        tableHtml = tableHtml + `&lt;tr>&lt;td class="${className}"> ${currentNumber}&lt;/td>&lt;/tr>`;
+    }
+
+
+    // create html for each number 
+    // after, put that html in the table 
+
+    let tableElement = document.getElementById('trustworthyTable');
+    //put that html in the table
+    tableElement.innerHTML = tableHtml;
+
+    //bold the even numbers
+    // figure out where to display them in the &lt;table> 
+
+
+}
+
+
                     </code>
                 </pre>
 
 
             </div>
 
-            <div class="col-12 col-lg-4">
+            <div class="col-12 col-lg-4 bg-success-subtle mt-2">
                 <h3> How it works</h3>
-                <p>The code is structured in one function</p>
+                <p> Similar to the loop challenge
+                    TrustWorthy has three functions. </p>
 
                 <h5>
-                    <code>displaymessage()</code>
+                    <code>getValues()</code>
                 </h5>
                 <p>
-                    the <code>displaymessage</code> function reads the text from the input and
-                    displays it in a sweet alert popup
+                    First, we take a look at the <code>getValues</code> function.
+                    we start by extracting the <code>input</code> id from our html
+                    by using the function <code>let trustInput = document.getElementId('trustInput')</code>
+                    after we extract both <code>input</code> id's from our Html,
+                    we get the value out of the input by creating new values using javascript.
+                    The values that we will be using in js is startNumber and endNumber
+                    our startNumber will be used for our trustInput and the endNumber will be
+                    used as our worthyInput. i.e. <code>let startNumber = parseInT(trustInput.value);</code>
+                    as stated previously in the loop challenge, <code>parseInt</code> allows you to turn a string of
+                    text
+                    into numbers and not just any number, parseInt allows you to turn a string of text
+                    into integers. we will now use an <code>if</code> statement to validate
+                    that the input is indeed in fact integers by using the function <code>if (number.
+                        isInteger(startNumber) && Number.isInteger(endNumber)) </code> is true then we
+                    go to the next step, which is generate numbers. If either the <code>startNumber/endNumber</code>
+                    comes back as false then the sweet alert will show in the browser, alerting the user to
+                    enter valid numbers.
+                </p>
+                <hr />
+                <h5><code>generateTrustworthy()</code></h5>
+                <p>Now that we know that the inputs entered by the user are both integers, we will run a
+                    <code>for</code>
+                    loop that after looping will take those numbers and return them back to
+                    the getValue function. Our <code>for</code> loop function states that
+                    if our start number is less than our end number, the loop will continue by adding
+                    one until the start number is no longer less than the end number. Furthermore, our <code>if</code>
+                    statements
+                    that are apart of our loop helps us identify Trustworthy (numbers that are divisible by 3 and 5 with
+                    no remainders), Trust (numbers that are divisible by three with no remainders), Worthy (numbers that
+                    are divisible by five with no remainders), and regular integers that are neither divisible by three
+                    or five. Note: to replace the numbers that are divisible, with words, we must incorporate
+                    <code>else if</code>. The array of numbers and phrases will be returned back
+                    to the <code>getValues</code> function where they will be displayed by what our last function is.
+                </p>
+                <hr />
+                <h5><code>displayNumbers</code></h5>
+                <p>
+                    Our last function we will be using is
+                    <code>displayNumbers</code>this function isnt a built-in js
+                    function but a custom function that we're using to display an
+                    array of numbers and phrases on our Trustworthy webpage.
+                    First we will run another <code>for loop</code>. The <code>let index = 0;</code>
+                    intitializes a variable index to 0 which is the starting point, next <code>
+                        index &lt; numbers.length:</code> is the condition that keeps
+                    the loop running. it checks to make sure that the current index
+                    is less than the total number of elements in the array.
+                    lastly is <code>index = index + 1</code> this will increase the index by one
+                    until the loop ends because the index is no longer less than the total number of elements
+                    inside the array. currentNumber and className are both properties
+                    that helps us create the table for html the function
+                    <code> tableHtml = tableHtml + `&lt;tr>&lt;td class="${className}"> ${currentNumber}&lt;/td>&lt;/tr>`; </code>
+                    is now used as the tableElement id that we have extracted from our html which is
+                    trustworthyTable. This will allow javascript to
+                    be interactive with our html without having to write any of the functions
+                    for js on our html page.
+
                 </p>
             </div>
 
 
 
-        </div>
 
         </div>
+
+
 
     </main>
 
