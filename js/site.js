@@ -2,20 +2,24 @@
 function getValues() {
     //get each input by ID
     let trustInput = document.getElementById('trustInput');
+    // this gets the id from the element 
     let worthyInput = document.getElementById('worthyInput');
-    // get the value out of the <input>
-    let startNumber = parseInt(trustInput.value);
-    let endNumber = parseInt(worthyInput.value);
+    // get the value out of the <input> element which is 3 and 5
+    let trustNumber = parseInt(trustInput.value);
+    //this is where the string (trustinput.value)is turned into an integer by parseInt
+    //trustNumber now represents that input's element value
+    let worthyNumber = parseInt(worthyInput.value);
 
     //parseInt turns a string into a number
 
     //if the input is not a number we get NAN 
 
     // validate that the inputs are numbers
-    if (Number.isInteger(startNumber) && Number.isInteger(endNumber)) {
-        // if (Text.isInteger(startNumber) && Text.isInteger(endNumber));
+    if (Number.isInteger(trustNumber) && Number.isInteger(worthyNumber)) {
+        // another way to say it is if (number.isNAN(trustNumber) || number.isNAN(worthyNumber))
         //after you know if the number are both integers you 
-        let generatedNumbers = generateTrustworthy(startNumber, endNumber);
+        //
+        let generatedNumbers = generateTrustworthy(trustNumber, worthyNumber);
 
 
         //want to generate the numbers with function generateNumbers
@@ -43,13 +47,13 @@ function getValues() {
 
 
 //generate some numbers
-function generateTrustworthy(start, end) {
+function generateTrustworthy(trust, worthy) {
     //generate numbers between start and end
     let numbers = [];
 
 
-    for (let i = start; i <= end; i = i + 1) {
-        if (i % 3 == 0 && i % 5 == 0) {
+    for (let i = 1; i <= 100; i = i + 1) {
+        if (i % trust == 0 && i % worthy == 0) {
             numbers.push("TrustWorthy");
         }
         //replace the number with fizz by understanding 
@@ -58,10 +62,10 @@ function generateTrustworthy(start, end) {
         // that you want displayed on the table.
         //if i want to replace the value itself with a word i use (ELSE IF)
 
-        else if (i % 3 == 0) {
+        else if (i % trust == 0) {
             numbers.push("Trust")
         }
-        else if (i % 5 == 0) {
+        else if (i % worthy == 0) {
             numbers.push("Worthy")
         }
 
@@ -87,18 +91,14 @@ function displayNumbers(numbers) {
 
 
     //go through each number in the array
-    for (let index = 0; index < numbers.length; index = index + 1) {
-        //get one number out of the array
-        let currentNumber = numbers[index];
-        let className = '';
+    for (let i = 0; i < numbers.length; i = i + 1) {
+        //this means that i should always be less than how many numbers are in the array for ex.
+        //[1,2,3,4,5,6,7,8] this means that i should always be less than 8 for the loop to continue.
+        let value = numbers[i];
+        // this means that the value is assigned the number of
 
 
-
-
-
-        //else if (currentNumber % 5 == 0) { className = 'worthy'; }
-        //else (currentNumber % 15 == 0); { className = 'trustworthy'; }
-        tableHtml = tableHtml + `<tr><td class="${className}"> ${currentNumber}</td></tr>`;
+        tableHtml = tableHtml + `<tr><td> ${value}</td></tr>`;
     }
 
 

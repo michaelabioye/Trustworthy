@@ -64,75 +64,7 @@
             <div class="col-12 col-lg-8">
 
                 <pre class="line-numbers">
-                    <code class="language-js">
-                    
-function getValues() {
-    let trustInput = document.getElementById('trustInput');
-    let worthyInput = document.getElementById('worthyInput');
-    let startNumber = parseInt(trustInput.value);
-    let endNumber = parseInt(worthyInput.value);
-    if (Number.isInteger(startNumber) && Number.isInteger(endNumber)) {
-        let generatedNumbers = generateTrustworthy(startNumber, endNumber);
-        displayNumbers(generatedNumbers);
-    }
-    else {
-        
-        Swal.fire({
-            backdrop: false,
-            title: 'oops',
-            text: 'please enter valid start and end number',
-            icon: 'error',
-        });
-    }
-}
-
-
-
-function generateTrustworthy(start, end) {
-    
-    let numbers = [];
-
-
-    for (let i = start; i &lt;= end; i = i + 1) {
-        if (i % 3 == 0 && i % 5 == 0) {
-            numbers.push("TrustWorthy");
-        }
-
-        else if (i % 3 == 0) {
-            numbers.push("Trust")
-        }
-        else if (i % 5 == 0) {
-            numbers.push("Worthy")
-        }
-
-        else
-            numbers.push(i);
-    }   
-    return numbers;
-}
-
-
-
-function displayNumbers(numbers) {
-
-    let tableHtml = '';
-
-    for (let index = 0; index &lt; numbers.length; index = index + 1) {
-        let currentNumber = numbers[index];
-        let className = '';
-
-        tableHtml = tableHtml + `&lt;tr>&lt;td class="${className}"> ${currentNumber}&lt;/td>&lt;/tr>`;
-    }
-
-    let tableElement = document.getElementById('trustworthyTable');
-    tableElement.innerHTML = tableHtml;
-
-   
-
-
-}
-
-
+                    <code id="codeSample" class="language-js">
                     </code>
                 </pre>
 
@@ -261,6 +193,35 @@ function displayNumbers(numbers) {
         crossorigin="anonymous"></script>
 
     <script src="/js/prism.js"></script>
+    <script>
+        Prism.plugins.NormalizeWhitespace.setDefaults({
+            'remove-trailing': true,
+            'remove-indent': true,
+            'left-trim': true,
+            'right-trim': true
+        })
+
+        const codeBlock = document.querySelector('#codeSample');
+
+        fetch('/js/site.js')
+            .then(response => response.text())
+            .then(text => {
+                text = removeComments(text);
+                text = removeEmptyLines(text);
+
+                codeBlock.textContent = text
+
+                Prism.highlightElement(codeBlock);
+            });
+
+        function removeComments(str) {
+            return str.replace(/\/\/.*$/gm, '');
+        }
+
+        function removeEmptyLines(str) {
+            return str.replace(/(\n{2,})(?!(function))/g, '\n');
+        }
+    </script>
 
 </body>
 
